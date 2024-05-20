@@ -11,6 +11,6 @@ const questionSchema = mongoose.Schema({
   question_text: { type: String, required: true },
 });
 
-const Question = mongoose.model("Question", questionSchema);
+const QuestionModel = mongoose.model("Question", questionSchema);
 
-export default Question;
+export default QuestionModel;
