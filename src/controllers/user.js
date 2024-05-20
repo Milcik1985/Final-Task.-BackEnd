@@ -5,8 +5,6 @@ import User from "../models/user.js";
 
 const SIGN_UP = async (req, res) => {
   try {
-    console.log(req.body);
-
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
 
@@ -44,7 +42,7 @@ const LOG_IN = async (req, res) => {
     }
 
     const jwt_token = jwt.sign(
-      { userName: user.userName, email: user.email },
+      { user_id: user.id, email: user.email },
       process.env.JWT_SECRET,
       { expiresIn: "20h" }
     );

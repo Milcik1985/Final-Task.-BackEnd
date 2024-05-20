@@ -5,12 +5,17 @@ const POST_A_QUESTION = async (req, res) => {
   try {
     const { user_id } = req.user;
 
+    if (!user_id) {
+      return res.status(401).json({ message: "User is not authorized" });
+    }
+
     const question = new Question({
       id: uuidv4(),
       user_id,
       question_text: req.body.question_text,
     });
     const savedQuestion = await question.save();
+    console.log(question);
 
     return res
       .status(200)

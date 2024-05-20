@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
+import { v4 as uuidv4 } from "uuid";
 
 const questionSchema = mongoose.Schema({
-  id: { type: String, required: true },
+  _id: { type: String, default: uuidv4, required: true },
   user_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    type: String,
     required: true,
   },
   date: { type: Date, default: Date.now },
