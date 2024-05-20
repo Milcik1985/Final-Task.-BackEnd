@@ -1,4 +1,3 @@
-import Question from "../models/questions.js";
 import { v4 as uuidv4 } from "uuid";
 import QuestionModel from "../models/questions.js";
 
@@ -10,7 +9,7 @@ const POST_A_QUESTION = async (req, res) => {
       return res.status(401).json({ message: "User is not authorized" });
     }
 
-    const question = new Question({
+    const question = new QuestionModel({
       id: uuidv4(),
       user_id,
       question_text: req.body.question_text,

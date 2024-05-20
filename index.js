@@ -4,6 +4,7 @@ import "dotenv/config";
 import cors from "cors";
 import userRouter from "./src/routes/user.js";
 import questionRouter from "./src/routes/questions.js";
+import answerRouter from "./src/routes/answers.js";
 
 const app = express();
 
@@ -19,6 +20,7 @@ mongoose
 
 app.use(userRouter);
 app.use(questionRouter);
+app.use(answerRouter);
 
 app.use((req, res) => {
   return res.status(404).json({ status: "Endpoint does not exist" });

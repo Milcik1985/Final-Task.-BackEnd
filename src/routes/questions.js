@@ -10,6 +10,6 @@ const router = express.Router();
 
 router.post("/questions", authUser, POST_A_QUESTION);
 router.get("/questions", GET_ALL_QUESTIONS);
-router.delete("/questions/:id", DELETE_A_QUESTION);
+router.delete("/questions/:id", authUser, DELETE_A_QUESTION);
 
 export default router;
