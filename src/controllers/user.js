@@ -42,7 +42,7 @@ const LOG_IN = async (req, res) => {
     }
 
     const jwt_token = jwt.sign(
-      { user_id: user.id, email: user.email },
+      { user_id: user.id, userName: user.userName, email: user.email },
       process.env.JWT_SECRET,
       { expiresIn: "20h" }
     );
@@ -50,7 +50,7 @@ const LOG_IN = async (req, res) => {
     return res.json({ jwt: jwt_token, message: "Logged in successfully" });
   } catch (err) {
     console.log("Handled error:", err);
-    return res.status.json({ message: "Error occured" });
+    return res.status(500).json({ message: "Error occurred" });
   }
 };
 

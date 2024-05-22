@@ -10,6 +10,7 @@ const answerSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  userName: { type: String, required: true },
 });
 
 const AnswerModel = mongoose.model("Answer", answerSchema);

@@ -7,6 +7,7 @@ const questionSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  userName: { type: String, required: true },
   date: { type: Date, default: Date.now },
   question_text: { type: String, required: true },
 });

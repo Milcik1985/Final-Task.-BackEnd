@@ -1,28 +1,36 @@
-import { v4 as uuidv4 } from "uuid";
 import QuestionModel from "../models/questions.js";
 
 const POST_A_QUESTION = async (req, res) => {
   try {
-    const { user_id } = req.user;
+    console.log("Request user:", req.user);
+    const { user_id, userName } = req.user;
+    const { question_text } = req.body;
 
-    if (!user_id) {
+    if (!user_id || !userName) {
+      console.log("User ID or username not found in request user");
       return res.status(401).json({ message: "User is not authorized" });
     }
 
+    if (!question_text) {
+      console.log("Question text is missing in request body");
+      return res.status(400).json({ message: "Question text is required" });
+    }
+
     const question = new QuestionModel({
-      id: uuidv4(),
       user_id,
-      question_text: req.body.question_text,
+      userName,
+      question_text,
     });
+
     const savedQuestion = await question.save();
-    console.log(question);
+    console.log("Saved question:", savedQuestion);
 
     return res
       .status(200)
       .json({ status: "Your Question Is Posted", question: savedQuestion });
   } catch (err) {
     console.log("Handled error:", err);
-    return res.status(500).json({ message: "Error occured" });
+    return res.status(500).json({ message: "Error occurred" });
   }
 };
 

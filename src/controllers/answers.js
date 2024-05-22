@@ -3,7 +3,7 @@ import AnswerModel from "../models/answers.js";
 
 const POST_AN_ANSWER = async (req, res) => {
   try {
-    const { user_id } = req.user;
+    const { user_id, userName } = req.user;
     const questionId = req.params.id;
     const { answer_text } = req.body;
 
@@ -11,6 +11,7 @@ const POST_AN_ANSWER = async (req, res) => {
       _id: uuidv4(),
       question_id: questionId,
       user_id,
+      userName,
       answer_text,
     });
 
@@ -28,13 +29,13 @@ const POST_AN_ANSWER = async (req, res) => {
 
 const GET_ALL_ANSWERS = async (req, res) => {
   try {
-    console.log("Inside GET_ALL_ANSWERS controller function");
-
     const questionId = req.params.id;
 
     console.log("Question id:", questionId);
 
-    const answers = await AnswerModel.find({ question_id: questionId });
+    const answers = await AnswerModel.find({
+      question_id: questionId,
+    }).populate("userName", "userName");
     console.log("Retrieved answers:", answers);
 
     console.log("Retrieved answers:", answers);
