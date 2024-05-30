@@ -37,7 +37,9 @@ const POST_A_QUESTION = async (req, res) => {
 
 const GET_ALL_QUESTIONS = async (req, res) => {
   try {
-    const questions = await QuestionModel.find({ userId: req.body.userId });
+    const questions = await QuestionModel.find({ userId: req.body.userId })
+      .maxTimeMS(30000)
+      .exec();
     return res.json({ questions: questions });
   } catch (err) {
     console.log("Handled error:", err);
