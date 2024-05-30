@@ -1,4 +1,5 @@
 import QuestionModel from "../models/questions.js";
+import AnswerModel from "../models/answers.js";
 
 const POST_A_QUESTION = async (req, res) => {
   try {
